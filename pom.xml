@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.md-5</groupId>
-    <artifactId>bungeecord-parent</artifactId>
+    <groupId>io.minimum.libertycord</groupId>
+    <artifactId>libertycord-parent</artifactId>
     <version>1.12-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>BungeeCord-Parent</name>
-    <description>Parent project for all BungeeCord modules.</description>
+    <name>LibertyCord-Parent</name>
+    <description>Parent project for all LibertyCord modules.</description>
     <url>https://github.com/SpigotMC/BungeeCord</url>
     <inceptionYear>2012</inceptionYear>
     <organization>

@@ -4,17 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.md-5</groupId>
-        <artifactId>bungeecord-parent</artifactId>
+        <groupId>io.minimum.libertycord</groupId>
+        <artifactId>libertycord-parent</artifactId>
         <version>1.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>net.md-5</groupId>
-    <artifactId>bungeecord-event</artifactId>
+    <groupId>io.minimum.libertycord</groupId>
+    <artifactId>libertycord-event</artifactId>
     <version>1.12-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>BungeeCord-Event</name>
-    <description>Generic java event dispatching API intended for use with BungeeCord</description>
+    <name>LibertyCord-Event</name>
+    <description>Generic java event dispatching API intended for use with LibertyCord</description>
 </project>

@@ -4,19 +4,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.md-5</groupId>
-        <artifactId>bungeecord-parent</artifactId>
+        <groupId>io.minimum.libertycord</groupId>
+        <artifactId>libertycord-parent</artifactId>
         <version>1.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>net.md-5</groupId>
-    <artifactId>bungeecord-module</artifactId>
+    <groupId>io.minimum.libertycord</groupId>
+    <artifactId>libertycord-module</artifactId>
     <version>1.12-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>BungeeCord Modules</name>
-    <description>Parent project for all BungeeCord modules.</description>
+    <name>LibertyCord Modules</name>
+    <description>Parent project for all LibertyCord modules.</description>
 
     <modules>
         <module>cmd-alert</module>
@@ -34,8 +34,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-api</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

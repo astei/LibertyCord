@@ -4,19 +4,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.md-5</groupId>
-        <artifactId>bungeecord-parent</artifactId>
+        <groupId>io.minimum.libertycord</groupId>
+        <artifactId>libertycord-parent</artifactId>
         <version>1.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>net.md-5</groupId>
-    <artifactId>bungeecord-query</artifactId>
+    <groupId>io.minimum.libertycord</groupId>
+    <artifactId>libertycord-query</artifactId>
     <version>1.12-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>BungeeCord-Query</name>
-    <description>Minecraft query implementation based on the BungeeCord API.</description>
+    <name>LibertyCord-Query</name>
+    <description>Minecraft query implementation based on the LibertyCord API.</description>
 
     <dependencies>
         <dependency>
@@ -26,8 +26,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-api</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

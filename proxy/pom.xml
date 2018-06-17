@@ -4,18 +4,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.md-5</groupId>
-        <artifactId>bungeecord-parent</artifactId>
+        <groupId>io.minimum.libertycord</groupId>
+        <artifactId>libertycord-parent</artifactId>
         <version>1.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>net.md-5</groupId>
-    <artifactId>bungeecord-proxy</artifactId>
+    <groupId>io.minimum.libertycord</groupId>
+    <artifactId>libertycord-proxy</artifactId>
     <version>1.12-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>BungeeCord-Proxy</name>
+    <name>LibertyCord-Proxy</name>
     <description>Proxy component of the Elastic Portal Suite</description>
 
     <properties>
@@ -55,32 +55,32 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-api</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-api</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-log</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-log</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-native</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-native</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-protocol</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-protocol</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-query</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-query</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

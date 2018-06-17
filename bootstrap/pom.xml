@@ -4,19 +4,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.md-5</groupId>
-        <artifactId>bungeecord-parent</artifactId>
+        <groupId>io.minimum.libertycord</groupId>
+        <artifactId>libertycord-parent</artifactId>
         <version>1.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>net.md-5</groupId>
-    <artifactId>bungeecord-bootstrap</artifactId>
+    <groupId>io.minimum.libertycord</groupId>
+    <artifactId>libertycord-bootstrap</artifactId>
     <version>1.12-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>BungeeCord-Bootstrap</name>
-    <description>Java 1.6 loader for BungeeCord</description>
+    <name>LibertyCord-Bootstrap</name>
+    <description>Java 1.6 loader for LibertyCord</description>
 
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
@@ -27,8 +27,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.md-5</groupId>
-            <artifactId>bungeecord-proxy</artifactId>
+            <groupId>io.minimum.libertycord</groupId>
+            <artifactId>libertycord-proxy</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
@@ -41,7 +41,7 @@
     </dependencies>
 
     <build>
-        <finalName>BungeeCord</finalName>
+        <finalName>LibertyCord</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
