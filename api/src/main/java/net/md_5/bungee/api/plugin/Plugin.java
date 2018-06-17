@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ConfigurationAdapter;
-import net.md_5.bungee.api.scheduler.GroupedThreadFactory;
 
 /**
  * Represents any Plugin that may be loaded at runtime to enhance existing
@@ -98,7 +97,7 @@ public class Plugin
         {
             String name = ( getDescription() == null ) ? "unknown" : getDescription().getName();
             service = Executors.newCachedThreadPool( new ThreadFactoryBuilder().setNameFormat( name + " Pool Thread #%1$d" )
-                    .setThreadFactory( new GroupedThreadFactory( this, name ) ).build() );
+                    .build() );
         }
         return service;
     }
