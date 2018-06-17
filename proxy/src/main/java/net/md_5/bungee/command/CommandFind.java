@@ -1,4 +1,4 @@
-package net.md_5.bungee.module.cmd.find;
+package net.md_5.bungee.command;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;

@@ -72,20 +72,13 @@ import net.md_5.bungee.chat.ScoreComponentSerializer;
 import net.md_5.bungee.chat.SelectorComponentSerializer;
 import net.md_5.bungee.chat.TextComponentSerializer;
 import net.md_5.bungee.chat.TranslatableComponentSerializer;
-import net.md_5.bungee.command.CommandBungee;
-import net.md_5.bungee.command.CommandEnd;
-import net.md_5.bungee.command.CommandIP;
-import net.md_5.bungee.command.CommandPerms;
-import net.md_5.bungee.command.CommandReload;
-import net.md_5.bungee.command.ConsoleCommandCompleter;
-import net.md_5.bungee.command.ConsoleCommandSender;
+import net.md_5.bungee.command.*;
 import net.md_5.bungee.compress.CompressFactory;
 import net.md_5.bungee.conf.Configuration;
 import net.md_5.bungee.conf.YamlConfig;
 import net.md_5.bungee.forge.ForgeConstants;
 import net.md_5.bungee.log.BungeeLogger;
 import net.md_5.bungee.log.LoggingOutputStream;
-import net.md_5.bungee.module.ModuleManager;
 import net.md_5.bungee.netty.PipelineUtils;
 import net.md_5.bungee.protocol.DefinedPacket;
 import net.md_5.bungee.protocol.ProtocolConstants;
@@ -165,7 +158,6 @@ public class BungeeCord extends ProxyServer
             .registerTypeAdapter( Favicon.class, Favicon.getFaviconTypeAdapter() ).create();
     @Getter
     private ConnectionThrottle connectionThrottle;
-    private final ModuleManager moduleManager = new ModuleManager();
 
     
     {
@@ -175,6 +167,12 @@ public class BungeeCord extends ProxyServer
         getPluginManager().registerCommand( null, new CommandIP() );
         getPluginManager().registerCommand( null, new CommandBungee() );
         getPluginManager().registerCommand( null, new CommandPerms() );
+        getPluginManager().registerCommand( null, new CommandAlert());
+        getPluginManager().registerCommand( null, new CommandAlertRaw() );
+        getPluginManager().registerCommand( null, new CommandFind() );
+        getPluginManager().registerCommand( null, new CommandList() );
+        getPluginManager().registerCommand( null, new CommandSend() );
+        getPluginManager().registerCommand( null, new CommandServer() );
 
         registerChannel( "BungeeCord" );
     }
@@ -257,10 +255,6 @@ public class BungeeCord extends ProxyServer
         }
 
         eventLoops = PipelineUtils.newEventLoopGroup( 0, new ThreadFactoryBuilder().setNameFormat( "Netty IO Thread #%1$d" ).build() );
-
-        File moduleDirectory = new File( "modules" );
-        moduleManager.load( this, moduleDirectory );
-        pluginManager.detectPlugins( moduleDirectory );
 
         pluginsFolder.mkdir();
         pluginManager.detectPlugins( pluginsFolder );

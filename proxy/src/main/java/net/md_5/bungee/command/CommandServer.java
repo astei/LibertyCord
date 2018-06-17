@@ -1,4 +1,4 @@
-package net.md_5.bungee.module.cmd.server;
+package net.md_5.bungee.command;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

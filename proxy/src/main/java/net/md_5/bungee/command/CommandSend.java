@@ -1,4 +1,4 @@
-package net.md_5.bungee.module.cmd.send;
+package net.md_5.bungee.command;
 
 import com.google.common.collect.ImmutableSet;
 import java.util.HashSet;
