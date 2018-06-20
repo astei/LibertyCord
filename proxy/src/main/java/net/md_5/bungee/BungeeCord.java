@@ -114,7 +114,6 @@ public class BungeeCord extends ProxyServer
      * locations.yml save thread.
      */
     private final Timer saveThread = new Timer( "Reconnect Saver" );
-    private final Timer metricsThread = new Timer( "Metrics Thread" );
     /**
      * Server socket listener.
      */
@@ -290,7 +289,6 @@ public class BungeeCord extends ProxyServer
                 }
             }
         }, 0, TimeUnit.MINUTES.toMillis( 5 ) );
-        metricsThread.scheduleAtFixedRate( new Metrics(), 0, TimeUnit.MINUTES.toMillis( Metrics.PING_INTERVAL ) );
     }
 
     public void startListeners()
@@ -412,7 +410,6 @@ public class BungeeCord extends ProxyServer
                     reconnectHandler.close();
                 }
                 saveThread.cancel();
-                metricsThread.cancel();
 
                 // TODO: Fix this shit
                 getLogger().info( "Disabling plugins" );
