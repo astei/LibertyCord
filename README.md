@@ -14,6 +14,9 @@ The changes I plan to make are unlikely to be accepted by md\_5, the author of B
 
 I had been involved in another BungeeCord fork, Waterfall, which ended up being a PaperSpigot analogue to BungeeCord. Waterfall is today mostly aimed at people who desire strong Forge support.
 
+LibertyCord will cherry-pick commits from BungeeCord and include patches from other forks of BungeeCord
+that I feel have merit.
+
 LibertyCord is expressly aimed at three types of people:
 
 * **People where efficiency counts most**. LibertyCord aims for a more compact codebase while not compromising on performance
