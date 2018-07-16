@@ -39,3 +39,5 @@ Here's what we focus on:
 Here's what we won't focus on:
 
 * Compatibility for old MC versions. Please upgrade to the latest MC version.
+* Forge support. LibertyCord follows upstream's Forge support policy, which as of 1.13 and above will be "best-effort".
+  If there is demand, LibertyCord may expand or shrink its Forge support.
