@@ -1,11 +1,7 @@
 package net.md_5.bungee;
 
 import java.security.Security;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import net.md_5.bungee.api.ChatColor;
@@ -36,7 +32,7 @@ public class BungeeCordLauncher
 
         BungeeCord bungee = new BungeeCord();
         ProxyServer.setInstance( bungee );
-        bungee.getLogger().info( "Enabled Liberty version " + bungee.getVersion() );
+        bungee.getLogger().info( "Enabled LibertyCord version " + bungee.getVersion() );
         bungee.start();
 
         if ( !options.has( "noconsole" ) )
