@@ -402,7 +402,7 @@ public enum Protocol
             ProtocolData protocolData = getProtocolData( version );
             if ( protocolData == null )
             {
-                throw new BadPacketException( "Unsupported protocol version" );
+                return null; // Unsupported protocol version
             }
             if ( id > MAX_PACKET_ID )
             {
