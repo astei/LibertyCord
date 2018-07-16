@@ -56,7 +56,7 @@ public class PipelineUtils
             ch.pipeline().addBefore( FRAME_DECODER, LEGACY_DECODER, new LegacyDecoder() );
             ch.pipeline().addAfter( FRAME_DECODER, PACKET_DECODER, new MinecraftDecoder( Protocol.HANDSHAKE, true, ProxyServer.getInstance().getProtocolVersion() ) );
             ch.pipeline().addAfter( FRAME_PREPENDER, PACKET_ENCODER, new MinecraftEncoder( Protocol.HANDSHAKE, true, ProxyServer.getInstance().getProtocolVersion() ) );
-            ch.pipeline().addBefore( FRAME_PREPENDER, LEGACY_KICKER, new KickStringWriter() );
+            ch.pipeline().addBefore( FRAME_PREPENDER, LEGACY_KICKER, kickStringWriter);
             ch.pipeline().get( HandlerBoss.class ).setHandler( new InitialHandler( BungeeCord.getInstance(), listener ) );
 
             if ( listener.isProxyProtocol() )
@@ -67,6 +67,7 @@ public class PipelineUtils
     };
     public static final Base BASE = new Base();
     private static final Varint21LengthFieldPrepender framePrepender = new Varint21LengthFieldPrepender();
+    private static final KickStringWriter kickStringWriter = new KickStringWriter();
     public static final String TIMEOUT_HANDLER = "timeout";
     public static final String PACKET_DECODER = "packet-decoder";
     public static final String PACKET_ENCODER = "packet-encoder";

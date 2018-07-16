@@ -224,7 +224,6 @@ public class DownstreamBridge extends PacketHandler
     @Override
     public void handle(PluginMessage pluginMessage) throws Exception
     {
-        DataInput in = pluginMessage.getStream();
         PluginMessageEvent event = new PluginMessageEvent( server, con, pluginMessage.getTag(), pluginMessage.getData().clone() );
 
         if ( bungee.getPluginManager().callEvent( event ).isCancelled() )
@@ -251,6 +250,7 @@ public class DownstreamBridge extends PacketHandler
 
         if ( pluginMessage.getTag().equals( "BungeeCord" ) )
         {
+            DataInput in = pluginMessage.getStream();
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
             String subChannel = in.readUTF();
 
@@ -479,7 +479,7 @@ public class DownstreamBridge extends PacketHandler
     {
         if ( tabCompleteResponse.getCommands() == null )
         {
-            // Passthrough on 1.13 style command responses - unclear of a sane way to process them at the moment, contributions welcome 
+            // Passthrough on 1.13 style command responses - unclear of a sane way to process them at the moment, contributions welcome
             return;
         }
 
