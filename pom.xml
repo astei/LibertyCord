@@ -5,7 +5,7 @@
 
     <groupId>io.minimum.libertycord</groupId>
     <artifactId>libertycord-parent</artifactId>
-    <version>1.12-SNAPSHOT</version>
+    <version>1.13-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>LibertyCord-Parent</name>
