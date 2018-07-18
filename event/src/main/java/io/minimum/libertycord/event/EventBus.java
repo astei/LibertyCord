@@ -61,8 +61,10 @@ public class EventBus {
     public <T> void deregisterHandler(RegisteredEventExecutor<T> executor) {
         registrationLock.lock();
         try {
-            registeredExecutors.get(executor.getHandles()).remove(executor);
-            bakeHandlers(executor.getHandles());
+            List<RegisteredEventExecutor> registered = registeredExecutors.get(executor.getHandles());
+            if (registered != null && registered.remove(executor)) {
+                bakeHandlers(executor.getHandles());
+            }
         } finally {
             registrationLock.unlock();
         }
