@@ -23,12 +23,17 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+
+import io.minimum.libertycord.event.EventBus;
+import io.minimum.libertycord.event.EventExecutor;
+import io.minimum.libertycord.event.ReflectiveEventBusAdapter;
+import io.minimum.libertycord.event.RegisteredEventExecutor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.event.EventBus;
 import net.md_5.bungee.event.EventHandler;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -48,11 +53,14 @@ public class PluginManager
     /*========================================================================*/
     private final Yaml yaml;
     private final EventBus eventBus;
+    private final ReflectiveEventBusAdapter eventBusAdapter;
     private final Map<String, Plugin> plugins = new LinkedHashMap<>();
     private final Map<String, Command> commandMap = new HashMap<>();
     private Map<String, PluginDescription> toLoad = new HashMap<>();
     private final Multimap<Plugin, Command> commandsByPlugin = ArrayListMultimap.create();
     private final Multimap<Plugin, Listener> listenersByPlugin = ArrayListMultimap.create();
+    @Getter
+    private final LibertyCord libertyCord;
 
     @SuppressWarnings("unchecked")
     public PluginManager(ProxyServer proxy)
@@ -67,6 +75,9 @@ public class PluginManager
         yaml = new Yaml( yamlConstructor );
 
         eventBus = new EventBus( proxy.getLogger() );
+        eventBusAdapter = new ReflectiveEventBusAdapter( eventBus );
+
+        libertyCord = new LibertyCord();
     }
 
     /**
@@ -403,7 +414,7 @@ public class PluginManager
             Preconditions.checkArgument( !method.isAnnotationPresent( Subscribe.class ),
                     "Listener %s has registered using deprecated subscribe annotation! Please update to @EventHandler.", listener );
         }
-        eventBus.register( listener );
+        eventBusAdapter.register( listener );
         listenersByPlugin.put( plugin, listener );
     }
 
@@ -414,7 +425,7 @@ public class PluginManager
      */
     public void unregisterListener(Listener listener)
     {
-        eventBus.unregister( listener );
+        eventBusAdapter.unregister( listener );
         listenersByPlugin.values().remove( listener );
     }
 
@@ -425,8 +436,28 @@ public class PluginManager
     {
         for ( Iterator<Listener> it = listenersByPlugin.get( plugin ).iterator(); it.hasNext(); )
         {
-            eventBus.unregister( it.next() );
+            eventBusAdapter.unregister( it.next() );
             it.remove();
+        }
+    }
+
+    public class LibertyCord {
+        private final Multimap<Plugin, RegisteredEventExecutor<?>> registeredEventExecutors = ArrayListMultimap.create();
+
+        public <T> RegisteredEventExecutor<T> registerEventExecutor(Plugin plugin, byte priority, Class<T> eventClass, EventExecutor<T> executor) {
+            RegisteredEventExecutor<T> registered = eventBus.registerHandler(priority, eventClass, executor);
+            registeredEventExecutors.put(plugin, registered);
+            return registered;
+        }
+
+        public <T> void deregisterEventExecutor(RegisteredEventExecutor<T> executor) {
+            eventBus.deregisterHandler(executor);
+            registeredEventExecutors.values().remove(executor);
+        }
+
+        public <T> void deregisterAllEventExecutors(Plugin plugin) {
+            Collection<RegisteredEventExecutor<?>> executors = registeredEventExecutors.removeAll(plugin);
+            executors.forEach(eventBus::deregisterHandler);
         }
     }
 }

@@ -1,19 +1,21 @@
-package net.md_5.bungee.event;
+package io.minimum.libertycord.event;
 
 import java.util.concurrent.CountDownLatch;
+
+import net.md_5.bungee.event.EventHandler;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class EventBusTest
+public class NestedEventsTest
 {
 
-    private final EventBus bus = new EventBus();
+    private final EventBus bus = new EventBus( null );
     private final CountDownLatch latch = new CountDownLatch( 2 );
 
     @Test
     public void testNestedEvents()
     {
-        bus.register( this );
+        new ReflectiveEventBusAdapter(bus).register( this );
         bus.post( new FirstEvent() );
         Assert.assertEquals( 0, latch.getCount() );
     }

@@ -1,7 +1,6 @@
-package net.md_5.bungee.event;
+package io.minimum.libertycord.event;
 
 import com.google.common.base.Preconditions;
-import io.minimum.libertycord.event.EventExecutor;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Method;
@@ -21,7 +20,7 @@ class ReflectiveEventExecutor<T> implements EventExecutor<T> {
     public void execute(T event) {
         Class<?> methodParameterClazz = method.getParameterTypes()[0];
         if (methodParameterClazz.isAssignableFrom(event.getClass())) {
-            method.invoke(listener, method);
+            method.invoke(listener, event);
         }
     }
 }

@@ -1,20 +1,24 @@
-package net.md_5.bungee.event;
+package io.minimum.libertycord.event;
 
 import java.util.concurrent.CountDownLatch;
+
+import net.md_5.bungee.event.EventHandler;
+import net.md_5.bungee.event.EventPriority;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class EventPriorityTest
 {
 
-    private final EventBus bus = new EventBus();
+    private final EventBus bus = new EventBus(null);
     private final CountDownLatch latch = new CountDownLatch( 7 );
 
     @Test
     public void testPriority()
     {
-        bus.register( this );
-        bus.register( new EventPriorityListenerPartner() );
+        ReflectiveEventBusAdapter adapter = new ReflectiveEventBusAdapter( bus );
+        adapter.register( this );
+        adapter.register( new EventPriorityListenerPartner() );
         bus.post( new PriorityTestEvent() );
         Assert.assertEquals( 0, latch.getCount() );
     }
