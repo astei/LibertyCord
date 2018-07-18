@@ -10,11 +10,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @RequiredArgsConstructor
 public class ReflectiveEventBusAdapter {
     private final EventBus bus;
     private final Multimap<Object, RegisteredEventExecutor<?>> registeredListeners = ArrayListMultimap.create();
+    private final Lock registrationLock = new ReentrantLock();
 
     public void register(Object listener) {
         Preconditions.checkNotNull(listener, "listener");
@@ -29,14 +32,23 @@ public class ReflectiveEventBusAdapter {
             EventHandler handler = method.getAnnotation(EventHandler.class);
             ReflectiveEventExecutor executor = new ReflectiveEventExecutor<>(listener, method);
             RegisteredEventExecutor registered = bus.registerHandler(handler.priority(), method.getParameterTypes()[0], executor);
-            registeredListeners.put(listener, registered);
+            registrationLock.lock();
+            try {
+                registeredListeners.put(listener, registered);
+            } finally {
+                registrationLock.unlock();
+            }
         }
     }
 
     public void unregister(Object listener) {
-        Collection<RegisteredEventExecutor<?>> registered = registeredListeners.removeAll(listener);
-        if (!registered.isEmpty()) {
-            registered.forEach(bus::deregisterHandler);
+        Collection<RegisteredEventExecutor<?>> registered;
+        registrationLock.lock();
+        try {
+            registered = registeredListeners.removeAll(listener);
+        } finally {
+            registrationLock.unlock();
         }
+        registered.forEach(bus::deregisterHandler);
     }
 }

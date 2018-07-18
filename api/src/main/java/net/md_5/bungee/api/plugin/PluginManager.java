@@ -28,13 +28,13 @@ import io.minimum.libertycord.event.EventBus;
 import io.minimum.libertycord.event.EventExecutor;
 import io.minimum.libertycord.event.ReflectiveEventBusAdapter;
 import io.minimum.libertycord.event.RegisteredEventExecutor;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.event.EventHandler;
+import net.md_5.bungee.event.EventPriority;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.introspector.PropertyUtils;
@@ -59,7 +59,6 @@ public class PluginManager
     private Map<String, PluginDescription> toLoad = new HashMap<>();
     private final Multimap<Plugin, Command> commandsByPlugin = ArrayListMultimap.create();
     private final Multimap<Plugin, Listener> listenersByPlugin = ArrayListMultimap.create();
-    @Getter
     private final LibertyCord libertyCord;
 
     @SuppressWarnings("unchecked")
@@ -441,8 +440,16 @@ public class PluginManager
         }
     }
 
+    public LibertyCord libertycord() {
+        return libertyCord;
+    }
+
     public class LibertyCord {
         private final Multimap<Plugin, RegisteredEventExecutor<?>> registeredEventExecutors = ArrayListMultimap.create();
+
+        public <T> RegisteredEventExecutor<T> registerEventExecutor(Plugin plugin, Class<T> eventClass, EventExecutor<T> executor) {
+            return registerEventExecutor(plugin, EventPriority.NORMAL, eventClass, executor);
+        }
 
         public <T> RegisteredEventExecutor<T> registerEventExecutor(Plugin plugin, byte priority, Class<T> eventClass, EventExecutor<T> executor) {
             RegisteredEventExecutor<T> registered = eventBus.registerHandler(priority, eventClass, executor);
@@ -450,12 +457,12 @@ public class PluginManager
             return registered;
         }
 
-        public <T> void deregisterEventExecutor(RegisteredEventExecutor<T> executor) {
+        public <T> void unregisterEventExecutor(RegisteredEventExecutor<T> executor) {
             eventBus.deregisterHandler(executor);
             registeredEventExecutors.values().remove(executor);
         }
 
-        public <T> void deregisterAllEventExecutors(Plugin plugin) {
+        public <T> void unregisterAllEventExecutors(Plugin plugin) {
             Collection<RegisteredEventExecutor<?>> executors = registeredEventExecutors.removeAll(plugin);
             executors.forEach(eventBus::deregisterHandler);
         }
