@@ -1,7 +1,11 @@
 package net.md_5.bungee;
 
 import java.security.Security;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import net.md_5.bungee.api.ChatColor;
@@ -29,6 +33,19 @@ public class BungeeCordLauncher
             System.out.println( Bootstrap.class.getPackage().getImplementationVersion() );
             return;
         }
+
+        if ( BungeeCord.class.getPackage().getSpecificationVersion() != null )
+        {
+            Date buildDate = new SimpleDateFormat( "yyyyMMdd" ).parse( BungeeCord.class.getPackage().getSpecificationVersion() );
+
+            Calendar deadline = Calendar.getInstance();
+            deadline.add( Calendar.WEEK_OF_YEAR, -4 );
+            if ( buildDate.before( deadline.getTime() ) )
+            {
+                System.err.println( "*** Warning, this build is outdated ***" );
+            }
+        }
+
 
         BungeeCord bungee = new BungeeCord();
         ProxyServer.setInstance( bungee );
