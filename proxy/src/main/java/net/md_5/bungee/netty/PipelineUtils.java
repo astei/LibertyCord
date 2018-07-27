@@ -129,6 +129,7 @@ public class PipelineUtils
         {
             ch.config().setOption( ChannelOption.IP_TOS, 0x18 );
             ch.config().setOption( ChannelOption.TCP_NODELAY, true );
+            ch.config().setOption( ChannelOption.SO_KEEPALIVE, true );
             ch.config().setAllocator( PooledByteBufAllocator.DEFAULT );
             ch.config().setWriteBufferWaterMark( MARK );
 
