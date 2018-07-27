@@ -158,24 +158,6 @@ public class BungeeCord extends ProxyServer
     @Getter
     private ConnectionThrottle connectionThrottle;
 
-    
-    {
-        // TODO: Proper fallback when we interface the manager
-        getPluginManager().registerCommand( null, new CommandReload() );
-        getPluginManager().registerCommand( null, new CommandEnd() );
-        getPluginManager().registerCommand( null, new CommandIP() );
-        getPluginManager().registerCommand( null, new CommandBungee() );
-        getPluginManager().registerCommand( null, new CommandPerms() );
-        getPluginManager().registerCommand( null, new CommandAlert());
-        getPluginManager().registerCommand( null, new CommandAlertRaw() );
-        getPluginManager().registerCommand( null, new CommandFind() );
-        getPluginManager().registerCommand( null, new CommandList() );
-        getPluginManager().registerCommand( null, new CommandSend() );
-        getPluginManager().registerCommand( null, new CommandServer() );
-
-        registerChannel( "BungeeCord" );
-    }
-
     public static BungeeCord getInstance()
     {
         return (BungeeCord) ProxyServer.getInstance();
@@ -221,6 +203,14 @@ public class BungeeCord extends ProxyServer
         getPluginManager().registerCommand( null, new CommandIP() );
         getPluginManager().registerCommand( null, new CommandBungee() );
         getPluginManager().registerCommand( null, new CommandPerms() );
+        getPluginManager().registerCommand( null, new CommandAlert());
+        getPluginManager().registerCommand( null, new CommandAlertRaw() );
+        getPluginManager().registerCommand( null, new CommandFind() );
+        getPluginManager().registerCommand( null, new CommandList() );
+        getPluginManager().registerCommand( null, new CommandSend() );
+        getPluginManager().registerCommand( null, new CommandServer() );
+
+        registerChannel( "BungeeCord" );
 
         if ( !Boolean.getBoolean( "net.md_5.bungee.native.disable" ) )
         {
