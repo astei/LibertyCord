@@ -315,6 +315,7 @@ public class BungeeCord extends ProxyServer
                     .option( ChannelOption.SO_REUSEADDR, true ) // TODO: Move this elsewhere!
                     .childAttr( PipelineUtils.LISTENER, info )
                     .childHandler( PipelineUtils.SERVER_CHILD )
+                    .childOption( ChannelOption.SO_KEEPALIVE, true )
                     .group( eventLoops )
                     .localAddress( info.getHost() )
                     .bind().addListener( listener );
